@@ -9,20 +9,14 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
- *
- * <Add Extended Description Here>
- *
- * @author <Add FirsName LastName>
- * @date <Add date >
- *
+ * @file stats.c 
+ * @brief This file contains all functions that will perform statistical analysis on a one-dimensional array.
+ * @author KYAMBADDE MARK ARTHUR
+ * @date 21.02.2026
  */
 
-
-
 #include <stdio.h>
-#include "stats.h"
+#include <stdbool.h>
 
 /* Size of the Data Set */
 #define SIZE (40)
@@ -40,4 +34,94 @@ void main() {
 
 }
 
+void print_statistics(unsigned char *arr, unsigned int size)
+{
+  printf("Statistics:\r\n");
+  printf("  Mean: %.2f\r\n", find_mean(arr, size));
+  printf("  Median: %.2f\r\n", find_median(arr, size));
+  printf("  Max: %d\r\n", find_max(arr, size));
+  printf("  Min: %d\r\n", find_min(arr, size));
+}
+
+void print_array(unsigned char *arr, unsigned int size)
+{
+  printf("{");
+  for(unsigned int i=0; i<size; i++)
+  {
+    printf("%d", *(arr+i));
+    if (i < size - 1) 
+    {
+      printf(", ");
+    }
+  }
+  printf("}\r\n");
+}
+
+float find_median(unsigned char *arr, unsigned int size)
+{
+  float median = 0;
+  if(size %2 == 0)
+  {
+    median = (*(arr + (size/2)) + *(arr + ((size-2)/2)))/2;
+  }
+  else
+  {
+    median = (*(arr+((size-1)/2)));
+  }
+  return median;
+}
+
+float find_mean(unsigned char *arr, unsigned int size)
+{
+  float mean = 0;
+  for(unsigned int i=0; i<size; i++)
+  {
+    mean += *(arr+i);
+  }
+  mean = mean/size;
+  return mean;
+}
+
+unsigned int find_max(unsigned char *arr, unsigned int size)
+{
+  unsigned int max = *(arr);
+  for(unsigned int i=0; i<size; i++)
+  {
+    if(*(arr+i) > max)
+    {
+      max = *(arr+i);
+    }
+  }
+  return max;
+}
+
+unsigned int find_min(unsigned char *arr, unsigned int size)
+{
+  unsigned int min = *(arr);
+  for(unsigned int i=0; i<size; i++)
+  {
+    if(*(arr+i) < min)
+    {
+      min = *(arr+i);
+    }
+  }
+  return min;
+}
+
+void sort_array(unsigned char *arr, unsigned int size)
+{
+  unsigned char temp = 0;
+  for (unsigned int i = 0; i < size - 1; i++) 
+  {
+    for (unsigned int j = 0; j < size - i - 1; j++) 
+    {
+      if (*(arr+j) > *(arr+j+1)) 
+      {
+          temp = *(arr+j);
+          *(arr+j) = *(arr+j+1);
+          *(arr+j+1) = temp;
+      }
+    }
+  }
+}
 /* Add other Implementation File Code Here */
