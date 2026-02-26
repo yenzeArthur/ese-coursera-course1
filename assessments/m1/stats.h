@@ -18,6 +18,10 @@
 #ifndef __STATS_H__
 #define __STATS_H__
 
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+
 /**
  * @brief prints the statistics of a given one-d array like: mean, median, maximum and minimum
  * @param arr dereferences a one-d array of type unsigned char
